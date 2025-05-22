@@ -1,8 +1,11 @@
 variables {
   name = "test"
   namespace = "default"
-  gateway_class_name = "gke-l7-global-external-managed"
-  gateway_listeners = [
+  class_name = "gke-l7-global-external-managed"
+  annotations = {
+    "networking.gke.io/certmap" = "main"
+  }
+  listeners = [
     {
       name     = "http"
       protocol = "HTTP"

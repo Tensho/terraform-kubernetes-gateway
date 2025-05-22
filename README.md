@@ -9,7 +9,24 @@ module "example" {
   source  = "Tensho/gateway/kubernetes"
   version = "1.0.0"
 
-  name = "Example"
+  name = "example"
+  namespace = "gateway-system"
+  class_name = "gke-l7-global-external-managed"
+  annotations = {
+    "networking.gke.io/certmap" = "main"
+  }
+  listeners = [
+    {
+      name     = "http"
+      protocol = "HTTP"
+      port     = 80
+    },
+    {
+      name     = "https"
+      protocol = "HTTPS"
+      port     = 443
+    }
+  ]
 }
 ```
 
@@ -41,9 +58,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_gateway_class_name"></a> [gateway\_class\_name](#input\_gateway\_class\_name) | Gateway class name | `string` | n/a | yes |
-| <a name="input_gateway_listeners"></a> [gateway\_listeners](#input\_gateway\_listeners) | Gateway listeners | `any` | n/a | yes |
-| <a name="input_name"></a> [name](#input\_name) | Global name | `string` | `"main"` | no |
+| <a name="input_annotations"></a> [annotations](#input\_annotations) | Gateway annotations | `map(string)` | `{}` | no |
+| <a name="input_class_name"></a> [class\_name](#input\_class\_name) | Gateway class name | `string` | n/a | yes |
+| <a name="input_listeners"></a> [listeners](#input\_listeners) | Gateway listeners | `any` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | Gateway name | `string` | `"main"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Kubernetes namespace | `string` | `"default"` | no |
 
 ## Outputs

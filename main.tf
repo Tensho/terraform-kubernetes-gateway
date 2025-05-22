@@ -4,13 +4,14 @@ resource "kubernetes_manifest" "default" {
     kind       = "Gateway"
 
     metadata = {
-      namespace = var.namespace
-      name      = var.name
+      namespace   = var.namespace
+      name        = var.name
+      annotations = var.annotations
     }
 
     spec = {
-      gatewayClassName = var.gateway_class_name
-      listeners        = var.gateway_listeners
+      gatewayClassName = var.class_name
+      listeners        = var.listeners
     }
   }
 
@@ -20,3 +21,18 @@ resource "kubernetes_manifest" "default" {
     }
   }
 }
+
+# Doesn't work as Gateway resource requires "spec" field on PATCH action
+# resource "kubernetes_annotations" "default" {
+#   api_version = kubernetes_manifest.default.manifest.apiVersion
+#   kind        = kubernetes_manifest.default.manifest.kind
+#
+#   metadata {
+#     namespace = kubernetes_manifest.default.manifest.metadata.namespace
+#     name      = kubernetes_manifest.default.manifest.metadata.name
+#   }
+#
+#   annotations = {
+#     "foo" = "bar"
+#   }
+# }

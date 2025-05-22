@@ -1,21 +1,27 @@
-variable "name" {
-  type        = string
-  description = "Global name"
-  default     = "main"
-}
-
 variable "namespace" {
   type        = string
   description = "Kubernetes namespace"
   default     = "default"
 }
 
-variable "gateway_class_name" {
+variable "name" {
+  type        = string
+  description = "Gateway name"
+  default     = "main"
+}
+
+variable "class_name" {
   type        = string
   description = "Gateway class name"
 }
 
-variable "gateway_listeners" {
+variable "listeners" {
   type        = any
   description = "Gateway listeners"
+}
+
+variable "annotations" {
+  type        = map(string)
+  description = "Gateway annotations"
+  default     = {}
 }
