@@ -9,12 +9,21 @@ module "example" {
   source  = "Tensho/gateway/kubernetes"
   version = "0.1.0"
 
-  name = "example"
-  namespace = "gateway-system"
+  name       = "example"
+  namespace  = "gateway-system"
   class_name = "gke-l7-global-external-managed"
+  
+  addresses = [
+    {
+      type  = "NamedAddress"
+      value = "main-ingress-static-ip"
+    }
+  ]
+  
   annotations = {
     "networking.gke.io/certmap" = "main"
   }
+  
   listeners = [
     {
       name     = "http"
@@ -58,6 +67,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_addresses"></a> [addresses](#input\_addresses) | List of addresses for the Gateway. Supports type: IPAddress, NamedAddress, Hostname. | <pre>list(object({<br/>    type  = string<br/>    value = string<br/>  }))</pre> | `null` | no |
 | <a name="input_annotations"></a> [annotations](#input\_annotations) | Gateway annotations | `map(string)` | `{}` | no |
 | <a name="input_class_name"></a> [class\_name](#input\_class\_name) | Gateway class name | `string` | n/a | yes |
 | <a name="input_listeners"></a> [listeners](#input\_listeners) | Gateway listeners | `any` | n/a | yes |

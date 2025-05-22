@@ -15,6 +15,15 @@ variable "class_name" {
   description = "Gateway class name"
 }
 
+variable "addresses" {
+  type = list(object({
+    type  = string
+    value = string
+  }))
+  description = "List of addresses for the Gateway. Supports type: IPAddress, NamedAddress, Hostname."
+  default     = null
+}
+
 variable "listeners" {
   type        = any
   description = "Gateway listeners"

@@ -2,6 +2,12 @@ variables {
   name = "test"
   namespace = "default"
   class_name = "gke-l7-global-external-managed"
+  addresses = [
+    {
+      type  = "NamedAddress"
+      value = "main-ingress-static-ip"
+    }
+  ]
   annotations = {
     "networking.gke.io/certmap" = "main"
   }
@@ -18,6 +24,10 @@ variables {
     }
   ]
 }
+
+# TODO: Create a setup
+# 1) address
+# 2) certificate map
 
 run "execute" {
   assert {

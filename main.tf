@@ -10,6 +10,7 @@ resource "kubernetes_manifest" "default" {
     }
 
     spec = {
+      addresses        = var.addresses
       gatewayClassName = var.class_name
       listeners        = var.listeners
     }
