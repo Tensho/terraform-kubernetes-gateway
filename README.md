@@ -7,7 +7,7 @@ Terraform module to manage [Kubernetes Gateway](https://kubernetes.io/docs/conce
 ```hcl
 module "example" {
   source  = "Tensho/gateway/kubernetes"
-  version = "1.0.0"
+  version = "0.1.0"
 
   name = "example"
   namespace = "gateway-system"
