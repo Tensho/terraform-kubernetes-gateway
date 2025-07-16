@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/Tensho/terraform-kubernetes-gateway/compare/v0.2.0...v0.3.0) (2025-07-16)
+
+
+### Features
+
+* **gke:** add gcp ssl policy ([1ee5fc3](https://github.com/Tensho/terraform-kubernetes-gateway/commit/1ee5fc3564f2cf7c2666fb42b8d197bdf788e128))
+
 ## [0.2.0](https://github.com/Tensho/terraform-kubernetes-gateway/compare/v0.1.0...v0.2.0) (2025-05-22)
 
 
