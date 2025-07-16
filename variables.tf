@@ -34,3 +34,12 @@ variable "annotations" {
   description = "Gateway annotations"
   default     = {}
 }
+
+########################################
+# GKE
+########################################
+variable "ssl_policy" {
+  type        = string
+  description = "GKE GCPGatewayPolicy SSL policy name"
+  default     = null
+}

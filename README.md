@@ -1,13 +1,13 @@
 # Kubernetes Gateway Terraform Module
 
-Terraform module to manage [Kubernetes Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/) resource (batteries included).
+Terraform module to manage [Kubernetes Gateway](https://kubernetes.io/docs/concepts/services-networking/gateway/) resource (GKE batteries included).
 
 ## Usage
 
 ```hcl
 module "example" {
   source  = "Tensho/gateway/kubernetes"
-  version = "0.2.0"
+  version = "0.3.0"
 
   name       = "example"
   namespace  = "gateway-system"
@@ -16,12 +16,12 @@ module "example" {
   addresses = [
     {
       type  = "NamedAddress"
-      value = "main-ingress-static-ip"
+      value = "example-ingress-static-ip"
     }
   ]
   
   annotations = {
-    "networking.gke.io/certmap" = "main"
+    "networking.gke.io/certmap" = "example"
   }
   
   listeners = [
@@ -36,6 +36,8 @@ module "example" {
       port     = 443
     }
   ]
+  
+  ssl_policy = "example"
 }
 ```
 
@@ -62,6 +64,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [kubernetes_manifest.default](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.gcp_gateway_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 
 ## Inputs
 
@@ -73,6 +76,7 @@ No modules.
 | <a name="input_listeners"></a> [listeners](#input\_listeners) | Gateway listeners | `any` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Gateway name | `string` | `"main"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Kubernetes namespace | `string` | `"default"` | no |
+| <a name="input_ssl_policy"></a> [ssl\_policy](#input\_ssl\_policy) | GKE GCPGatewayPolicy SSL policy name | `string` | `null` | no |
 
 ## Outputs
 
@@ -97,8 +101,17 @@ tflint --init
 
 #### Provider Authentication
 
+##### Kubernetes
+
 ```shell
 export KUBE_CONFIG_PATHS=~/.kube/config
+```
+
+##### Google Cloud Platform
+
+```shell
+gcloud auth application-default login
+export GOOGLE_PROJECT=terraform-test
 ```
 
 ### Development

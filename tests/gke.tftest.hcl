@@ -1,4 +1,3 @@
-# TODO: Make main test more generic, e.g. "nginx" or "istio"
 variables {
   name       = "test"
   namespace  = "default"
@@ -27,11 +26,24 @@ variables {
       port     = 443
     }
   ]
+
+  ssl_policy = "test"
+}
+
+run "setup" {
+  module {
+    source = "./tests/setup"
+  }
 }
 
 run "execute" {
   assert {
     condition     = length(kubernetes_manifest.default) != 0
     error_message = "Gateway resource has not been created"
+  }
+
+  assert {
+    condition     = length(kubernetes_manifest.gcp_gateway_policy) != 0
+    error_message = "GCPGatewayPolicy (SSL policy) resource has not been created"
   }
 }

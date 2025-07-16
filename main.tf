@@ -37,3 +37,29 @@ resource "kubernetes_manifest" "default" {
 #     "foo" = "bar"
 #   }
 # }
+
+resource "kubernetes_manifest" "gcp_gateway_policy" {
+  count = var.ssl_policy != null ? 1 : 0
+
+  manifest = {
+    apiVersion = "networking.gke.io/v1"
+    kind       = "GCPGatewayPolicy"
+
+    metadata = {
+      namespace = var.namespace
+      name      = var.name
+    }
+
+    spec = {
+      default = {
+        sslPolicy = var.ssl_policy
+      }
+
+      targetRef = {
+        group = "gateway.networking.k8s.io"
+        kind  = "Gateway"
+        name  = var.name
+      }
+    }
+  }
+}
