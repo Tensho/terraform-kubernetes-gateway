@@ -38,6 +38,8 @@ module "example" {
   ]
   
   ssl_policy = "example"
+  
+  http_to_https_redirect = true
 }
 ```
 
