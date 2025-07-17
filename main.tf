@@ -63,3 +63,44 @@ resource "kubernetes_manifest" "gcp_gateway_policy" {
     }
   }
 }
+
+# Redirect HTTP traffic from an infrastructure namespace
+# https://cloud.google.com/kubernetes-engine/docs/how-to/deploying-gateways#redirect_http_traffic_from_an_infrastructure_namespace
+resource "kubernetes_manifest" "redirect_http_to_https_route" {
+  count = var.http_to_https_redirect ? 1 : 0
+
+  manifest = {
+    apiVersion = "gateway.networking.k8s.io/v1beta1"
+    kind       = "HTTPRoute"
+
+    metadata = {
+      namespace = var.namespace
+      name      = "http-to-https-redirect"
+    }
+
+    spec = {
+      parentRefs = [
+        {
+          kind        = "Gateway"
+          namespace   = var.namespace
+          name        = var.name
+          sectionName = "http"
+        }
+      ]
+
+      rules = [
+        {
+          filters = [
+            {
+              type = "RequestRedirect"
+
+              requestRedirect = {
+                scheme = "https"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

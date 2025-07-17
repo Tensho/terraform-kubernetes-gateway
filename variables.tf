@@ -43,3 +43,9 @@ variable "ssl_policy" {
   description = "GKE GCPGatewayPolicy SSL policy name"
   default     = null
 }
+
+variable "http_to_https_redirect" {
+  type        = string
+  description = "Redirect HTTP traffic from an infrastructure namespace"
+  default     = false
+}

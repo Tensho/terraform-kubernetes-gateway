@@ -65,6 +65,7 @@ No modules.
 |------|------|
 | [kubernetes_manifest.default](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 | [kubernetes_manifest.gcp_gateway_policy](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
+| [kubernetes_manifest.redirect_http_to_https_route](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/manifest) | resource |
 
 ## Inputs
 
@@ -73,6 +74,7 @@ No modules.
 | <a name="input_addresses"></a> [addresses](#input\_addresses) | List of addresses for the Gateway. Supports type: IPAddress, NamedAddress, Hostname. | <pre>list(object({<br/>    type  = string<br/>    value = string<br/>  }))</pre> | `null` | no |
 | <a name="input_annotations"></a> [annotations](#input\_annotations) | Gateway annotations | `map(string)` | `{}` | no |
 | <a name="input_class_name"></a> [class\_name](#input\_class\_name) | Gateway class name | `string` | n/a | yes |
+| <a name="input_http_to_https_redirect"></a> [http\_to\_https\_redirect](#input\_http\_to\_https\_redirect) | Redirect HTTP traffic from an infrastructure namespace | `string` | `false` | no |
 | <a name="input_listeners"></a> [listeners](#input\_listeners) | Gateway listeners | `any` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | Gateway name | `string` | `"main"` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Kubernetes namespace | `string` | `"default"` | no |
