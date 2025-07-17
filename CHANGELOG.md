@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.0](https://github.com/Tensho/terraform-kubernetes-gateway/compare/v0.3.0...v0.4.0) (2025-07-17)
+
+
+### Features
+
+* add http-to-https redirect at infra namespace level ([81e4fc2](https://github.com/Tensho/terraform-kubernetes-gateway/commit/81e4fc2d86f0049440aa4133952d9aa00a328946))
+
 ## [0.3.0](https://github.com/Tensho/terraform-kubernetes-gateway/compare/v0.2.0...v0.3.0) (2025-07-16)
 
 
