@@ -95,11 +95,19 @@ This project uses [conventional commits](https://www.conventionalcommits.org/en/
 
 ### Prerequisites
 
+#### Tools Installation
+
 * [`terraform`](https://www.terraform.io/downloads.html)
 * [`gcloud`](https://cloud.google.com/sdk/gcloud/reference/)
 * [`pre-commit`](https://pre-commit.com/)
 * [`terraform-docs`](https://terraform-docs.io/)
 * [`tflint`](https://github.com/terraform-linters/tflint)
+
+Consider all necessary tools installation via [mise](https://mise.jdx.dev/):
+
+```
+mise install
+```
 
 #### Pre-Commit Hooks Installation
 
@@ -108,6 +116,9 @@ pre-commit install
 ```
 
 #### Provider Authentication
+
+> [!NOTE]
+> The current test setup targets GCP/GKE. You need GKE cluster to run the tests.
 
 ##### Kubernetes
 
@@ -124,11 +135,7 @@ export GOOGLE_PROJECT=terraform-test
 
 ### Development & Testing
 
-> [!NOTE]
-> The current test setup targets GCP/GKE.
-
-By default, when you run the `terraform test` command, Terraform looks for `*.tftest.hcl` files in both the root directory 
-and in the `tests` directory.
+The `terraform test` command looks for `*.tftest.hcl` files in both root directory and `tests` directory.
 
 ```shell
 terraform init
