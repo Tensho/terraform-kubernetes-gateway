@@ -9,12 +9,22 @@ resource "kubernetes_manifest" "default" {
       annotations = var.annotations
     }
 
-    spec = {
-      addresses        = var.addresses
-      gatewayClassName = var.class_name
-      listeners        = var.listeners
-    }
+    spec = merge(
+      {
+        gatewayClassName = var.class_name
+        listeners        = var.listeners
+      },
+      var.addresses == null ? {} : {
+        addresses = var.addresses
+      }
+    )
   }
+
+  computed_fields = [
+    "metadata.labels",
+    "metadata.annotations",
+    "spec.addresses",
+  ]
 
   wait {
     fields = {
