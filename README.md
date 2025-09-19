@@ -95,12 +95,16 @@ This project uses [conventional commits](https://www.conventionalcommits.org/en/
 
 ### Prerequisites
 
-#### MacOS
+* [`terraform`](https://www.terraform.io/downloads.html)
+* [`gcloud`](https://cloud.google.com/sdk/gcloud/reference/)
+* [`pre-commit`](https://pre-commit.com/)
+* [`terraform-docs`](https://terraform-docs.io/)
+* [`tflint`](https://github.com/terraform-linters/tflint)
+
+#### Pre-Commit Hooks Installation
 
 ```shell
-brew install pre-commit terraform-docs tflint
-pre-commit install --install-hooks
-tflint --init
+pre-commit install
 ```
 
 #### Provider Authentication
@@ -118,19 +122,16 @@ gcloud auth application-default login
 export GOOGLE_PROJECT=terraform-test
 ```
 
-### Development
+### Development & Testing
 
-```shell
-cd examples/
-terraform init
-terraform apply
-terraform destroy
-```
+> [!NOTE]
+> The current test setup targets GCP/GKE.
 
-### Testing
+By default, when you run the `terraform test` command, Terraform looks for `*.tftest.hcl` files in both the root directory 
+and in the `tests` directory.
 
 ```shell
 terraform init
-terraform test
-terraform test -filter main.tftest.hcl -verbose
+terraform test # run all tests
+terraform test -filter test/gke.tftest.hcl -verbose # run specific test
 ```

@@ -1,0 +1,9 @@
+[tools]
+gcloud = "latest"
+pre-commit = "latest"
+terraform = "latest"
+terraform-docs = "latest"
+tflint = "latest"
+
+[tasks.install-gke-gcloud-auth-plugin]
+run = "gcloud components install gke-gcloud-auth-plugin"
