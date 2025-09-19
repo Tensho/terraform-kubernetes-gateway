@@ -28,6 +28,8 @@ variables {
   ]
 
   ssl_policy = "test"
+
+  http_to_https_redirect = true
 }
 
 run "setup" {
@@ -45,5 +47,10 @@ run "execute" {
   assert {
     condition     = length(kubernetes_manifest.gcp_gateway_policy) != 0
     error_message = "GCPGatewayPolicy (SSL policy) resource has not been created"
+  }
+
+  assert {
+    condition     = length(kubernetes_manifest.redirect_http_to_https_route) != 0
+    error_message = "HTTPRoute (HTTP-to-HTTPS redirect) resource has not been created"
   }
 }
