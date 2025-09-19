@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/Tensho/terraform-kubernetes-gateway/compare/v0.4.0...v0.4.1) (2025-09-19)
+
+
+### Bug Fixes
+
+* flapping annotations on address absence ([198c4fa](https://github.com/Tensho/terraform-kubernetes-gateway/commit/198c4fa7b084c531a217393f0ffa5e9fbe762d65))
+
 ## [0.4.0](https://github.com/Tensho/terraform-kubernetes-gateway/compare/v0.3.0...v0.4.0) (2025-07-17)
 
 
