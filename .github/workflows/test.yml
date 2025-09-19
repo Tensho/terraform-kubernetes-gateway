@@ -1,0 +1,40 @@
+name: "Test"
+
+on:
+  push:
+    branches:
+      - '*'
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.7.0"
+
+      - run: terraform fmt -check
+
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/${{ vars.GCP_PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-oidc/providers/github-oidc
+          service_account: github-oidc@${{ vars.GCP_PROJECT_ID }}.iam.gserviceaccount.com
+
+      - uses: google-github-actions/get-gke-credentials@v3
+        with:
+          project_id: ${{ vars.GOOGLE_PROJECT }}
+          location: ${{ vars.GOOGLE_REGION }}
+          cluster_name: ${{ vars.GKE_CLUSTER_NAME }}
+
+      - run: terraform init
+
+      - run: terraform test
+        env:
+          GOOGLE_PROJECT: ${{ vars.GOOGLE_PROJECT }}
+          GOOGLE_REGION: ${{ vars.GOOGLE_REGION }}
