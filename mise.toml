@@ -5,5 +5,8 @@ terraform = "latest"
 terraform-docs = "latest"
 tflint = "latest"
 
+[env]
+_.file = '.env'
+
 [tasks.install-gke-gcloud-auth-plugin]
 run = "gcloud components install gke-gcloud-auth-plugin"

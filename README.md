@@ -120,10 +120,13 @@ pre-commit install
 > [!NOTE]
 > The current test setup targets GCP/GKE. You need GKE cluster to run the tests.
 
-##### Kubernetes
+Consider environment variables management for Terraform provider authentication via `.env` file, which [mise](https://mise.jdx.dev/)
+picks up automatically:
 
-```shell
-export KUBE_CONFIG_PATHS=~/.kube/config
+```
+GOOGLE_PROJECT=terraform-test
+GOOGLE_REGION=europe-west2
+KUBE_CONFIG_PATHS=~/.kube/config
 ```
 
 ##### Google Cloud Platform
@@ -131,6 +134,14 @@ export KUBE_CONFIG_PATHS=~/.kube/config
 ```shell
 gcloud auth application-default login
 export GOOGLE_PROJECT=terraform-test
+export GOOGLE_REGION=europe-west2
+```
+
+##### Kubernetes
+
+```shell
+gcloud container clusters get-credentials playground --region europe-west2 --project terraform-test
+export KUBE_CONFIG_PATHS=~/.kube/config
 ```
 
 ### Development & Testing
