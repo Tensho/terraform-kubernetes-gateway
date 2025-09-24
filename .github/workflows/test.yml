@@ -3,7 +3,10 @@ name: "Test"
 on:
   push:
     branches:
-      - '*'
+      - 'main'
+    paths:
+      - '**/*.tf'
+      - '**/*.hcl'
 
 permissions:
   contents: read
@@ -18,8 +21,6 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: "1.7.0"
-
-      - run: terraform fmt -check
 
       - uses: google-github-actions/auth@v2
         with:
